@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "cen"
+
+  # IP
+  config.vm.network "private_network", ip: "192.168.24.12"
+
+  # Sync folder
+  config.vm.synced_folder "../data", "/vagrant/data"
+
+  # Configuration
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "256"
+    vb.name = "Hadoop Slave 2"
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "../setup.yml"
+    ansible.inventory_path = "../hosts"
+    ansible.extra_vars = {
+      hadoop_node: '192.168.24.12',
+      hostname: 'hadoop-slave-2'
+    }
+    ansible_become_pass = 'vagrant'
+    ansible.limit = 'all'
+  end
+
+end

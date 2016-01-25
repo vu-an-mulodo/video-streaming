@@ -1,0 +1,9 @@
+---
+- hosts: "{{ hadoop_node }}"
+  sudo: yes
+  remote_user: vagrant
+  tasks:
+    - name: Install java
+      yum: name={{ item }} state=installed
+      with_items:
+        - java-1.8.0-openjdk-devel

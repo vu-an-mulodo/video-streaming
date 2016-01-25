@@ -1,0 +1,34 @@
+---
+- hosts: "{{ hadoop_node }}"
+  sudo: yes
+  remote_user: vagrant
+  tasks:
+    - name: copy file hadoop
+      shell: cp /vagrant/data/hadoop-2.7.1.tar.gz /home/vagrant
+
+    - name: unzip hadoop
+      shell: tar xzf hadoop-2.7.1.tar.gz
+
+    - name: rename hadoop folder
+      shell: mv hadoop-2.7.1 hadoop
+
+    - name: remove hadoop file
+      shell: rm hadoop-2.7.1.tar.gz
+
+    - name: change vagrant owner
+      shell: chown -R vagrant:vagrant hadoop
+
+    - name: copy config files hadoop-env.sh
+      copy: src=hadoop/hadoop-env.sh dest=/home/vagrant/hadoop/etc/hadoop/hadoop-env.sh
+
+    - name: copy config files core-site.xml
+      copy: src=hadoop/core-site.xml dest=/home/vagrant/hadoop/etc/hadoop/core-site.xml
+
+    - name: copy config files hdfs-site.xml
+      copy: src=hadoop/hdfs-site.xml dest=/home/vagrant/hadoop/etc/hadoop/hdfs-site.xml
+
+    - name: copy config files yarn-site.xml
+      copy: src=hadoop/yarn-site.xml dest=/home/vagrant/hadoop/etc/hadoop/yarn-site.xml
+
+    - name: copy config files mapred-site.xml
+      copy: src=hadoop/mapred-site.xml dest=/home/vagrant/hadoop/etc/hadoop/mapred-site.xml
