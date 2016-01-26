@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo cp -ruv /vagrant/www/* /usr/share/nginx/html
+echo "Done!"
