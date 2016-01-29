@@ -7,5 +7,5 @@ Step 4: Vagrant up each virtual machine and wait for first run configuration and
 Step 5: Enable SSH for ansible  
 * Reference: http://www.slideshare.net/nemo-mulodo/devops3-ansible-mosg  
 
-Step 6: Run ansible for playbooks/all/pb.yml  
+Step 6: Run ansible-playbook for playbooks/all/pb.yml  
 Done!
