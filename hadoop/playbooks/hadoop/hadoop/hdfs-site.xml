@@ -24,4 +24,8 @@
         <name>dfs.namenode.heartbeat.recheck-interval</name>
         <value>15000</value>
     </property>
+    <property>
+        <name>dfs.safemode.threshold.pct</name>
+        <value>0</value>
+    </property>
 </configuration>
